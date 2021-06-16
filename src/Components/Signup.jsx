@@ -1,7 +1,5 @@
 import React, { useRef, useState } from 'react'
 import firebase from "firebase";
-import { auth } from "./firebaseConfig";
-import styled from 'styled-components';
 import { Container, SubContainer } from "./styles/containersStyle";
 import { useHistory } from 'react-router-dom';
 export default function Signup() {
