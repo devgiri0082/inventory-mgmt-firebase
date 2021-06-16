@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import firebase from "firebase";
 import { auth } from "./firebaseConfig";
 import styled from 'styled-components';
-import { Container, SubContainer } from "./styles/style";
+import { Container, SubContainer } from "./styles/containersStyle";
 import { useHistory } from 'react-router-dom';
 export default function Signup() {
     let history = useHistory();
@@ -13,6 +13,10 @@ export default function Signup() {
         try {
             setError("");
             let userCredential = await firebase.auth().createUserWithEmailAndPassword(emailRef.current.value, passwordRef.current.value);
+            console.log(userCredential.user.email);
+            emailRef.current.value = "";
+            passwordRef.current.value = "";
+            history.push("/LogIn");
         } catch (err) {
             console.log("error:", err.code);
             setError(`erro: ${err.code}`);

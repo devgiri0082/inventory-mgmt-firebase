@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components';
-import { Container, SubContainer } from './styles/style';
+import { Container, SubContainer } from './styles/containersStyle';
 let Container1 = styled(Container)`
     gap: 50px;
 `

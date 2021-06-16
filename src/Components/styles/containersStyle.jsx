@@ -36,11 +36,13 @@ let SubContainer = styled.div`
         font-size: 20px;
         color: white;
         border: 1px solid white;
+        
     }
     button:hover {
         background: white;
         color: tomato;
         border: 1px solid tomato;
+        cursor: pointer;
     }
 `
 export { Container, SubContainer };

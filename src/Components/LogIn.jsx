@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import React, { useRef, useState } from 'react'
 import { useHistory } from "react-router-dom";
-import { Container, SubContainer } from "./styles/style";
+import { Container, SubContainer } from "./styles/containersStyle";
 
 export default function LogIn() {
     let history = useHistory();
@@ -14,6 +14,7 @@ export default function LogIn() {
             setError("");
             let userCredentials = await firebase.auth().signInWithEmailAndPassword(emailRef.current.value, passwordRef.current.value);
             console.log(userCredentials.user.email);
+            history.push("/Categories");
         } catch (err) {
             console.log(err.code);
             setError(`error: ${err.code}`);
