@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, SubContainer } from "./styles/containersStyle";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { auth } from "./firebaseConfig";
 let SubContainer1 = styled(SubContainer)`
     width: 30%;
     align-items: center;
@@ -15,9 +16,14 @@ export default function Categories() {
     const navigateTo = (path) => {
         history.push(`/${path}`)
     }
+    let logOut = () => {
+        let value = auth.signOut();
+        navigateTo("")
+    }
     return (
         <Container>
             <h1>Categories</h1>
+            <button onClick={logOut}>Logout</button>
             <SubContainer1>
                 <h2>GoTo Category</h2>
                 <button onClick={(e) => navigateTo("Laptop")}>Laptop</button>
