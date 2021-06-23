@@ -17,7 +17,7 @@ export default function Categories() {
         history.push(`/${path}`)
     }
     let logOut = () => {
-        let value = auth.signOut();
+        auth.signOut();
         navigateTo("")
     }
     return (
