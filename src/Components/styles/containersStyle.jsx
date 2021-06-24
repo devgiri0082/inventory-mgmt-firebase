@@ -1,6 +1,6 @@
 import styled from "styled-components";
 let Container = styled.div`
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     background: #cdc9f0;
     display: flex;
@@ -45,4 +45,11 @@ let SubContainer = styled.div`
         cursor: pointer;
     }
 `
-export { Container, SubContainer };
+
+let CardHolder = styled.div`
+    width: 90%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+`
+export { Container, SubContainer, CardHolder };

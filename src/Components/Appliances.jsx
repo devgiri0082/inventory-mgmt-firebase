@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Container, SubContainer } from './styles/containersStyle';
+import { CardHolder, Container, SubContainer } from './styles/containersStyle';
 import { Table } from './styles/tableStyles';
 import styled from "styled-components";
 import { db } from "./firebaseConfig";
 import TableHeader from "./TableHeader";
 import Form from "./Form";
+import firebase from "firebase";
 import { useHistory } from "react-router-dom";
+import Card from './Card';
 let SubContainer1 = styled(SubContainer)`
     width: 95%;
     height: auto;
@@ -13,18 +15,20 @@ let SubContainer1 = styled(SubContainer)`
 
 export default function Appliances() {
     let history = useHistory();
+    let user = firebase.auth().currentUser;
+    user || history.push("");
+    let userId = user.email.split(".").join("_");
     let [showForm, setShowForm] = useState(false);
     let [appliances, setAppliances] = useState([]);
     let getTodo = async () => {
-        let response = await db.collection("appliances").get();
+        let response = await db.collection(`Appliances`).get();
         // console.log(response.docs);
         let allAppliances = [];
         response.docs.forEach((elem) => {
-            let currentData = elem.data();
-            currentData["id"] = elem.id;
-            allAppliances.push(currentData);
+            let data = elem.data();
+            data.id = elem.id;
+            allAppliances.push(data);
         });
-        console.log(allAppliances);
         setAppliances(allAppliances);
 
     }
@@ -41,22 +45,12 @@ export default function Appliances() {
             <h1>Appliances Lists</h1>
             <button onClick={(e) => setShowForm(true)}>add Appliances</button>
             <button onClick={(e) => history.push("/Categories")}>goto Category</button>
-            <SubContainer1>
-                <Table>
-                    <TableHeader />
-                    {
-                        appliances.map((elem, index) => (
-                            <tr>
-                                <td>{elem.name}</td>
-                                <td>{elem.price}</td>
-                                <td>{elem.quantity}</td>
-                                <td><span>⚙️</span>|<span>🗑️</span></td>
-                            </tr>
-                        ))
-                    }
-                </Table>
-            </SubContainer1>
-            {showForm && <Form category={"appliances"} setShowForm={setShowForm} setValue={setAppliances} value={appliances} />}
+            <CardHolder>
+                {
+                    appliances.map((elem, index) => <Card getTodo={getTodo} category={"Appliances"} elemId={elem.id} name={elem.name} price={elem.price} description={elem.description} quantity={elem.quantity} image={elem.photoUrl} id={index} />)
+                }
+            </CardHolder>
+            {showForm && <Form category={"Appliances"} setShowForm={setShowForm} setValue={setAppliances} value={appliances} userId={userId} />}
         </Container>
     )
 }

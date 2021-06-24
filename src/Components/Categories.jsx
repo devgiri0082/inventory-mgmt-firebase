@@ -3,6 +3,7 @@ import { Container, SubContainer } from "./styles/containersStyle";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "./firebaseConfig";
+import firebase from "firebase";
 let SubContainer1 = styled(SubContainer)`
     width: 30%;
     align-items: center;
@@ -12,10 +13,12 @@ let SubContainer1 = styled(SubContainer)`
     }
 `
 export default function Categories() {
+    let user = firebase.auth().currentUser;
     let history = useHistory();
     const navigateTo = (path) => {
         history.push(`/${path}`)
     }
+    user || navigateTo("");
     let logOut = () => {
         auth.signOut();
         navigateTo("")

@@ -3,24 +3,66 @@ import styled from 'styled-components'
 import { db } from "./firebaseConfig";
 
 let Box = styled.div`
+    z-index: 5;
     position: absolute;
-    height: 50%;
+    min-height: 50%;
     width: 50%;
     background: white;
     padding: 20px;
+    border-radius: 5px;
+    input {
+        width: 80%;
+        height: 25px;
+        padding: 5px;
+        font-size: 17px;
+        outline: none;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    textArea {
+        width: 80%;
+        display: block;
+        height: 80px;
+        padding: 10px;
+        font-family: sans-serif;
+        resize: none;
+        outline: none;
+        margin-bottom: 10px;   
+    }
+    button {
+         margin-top: 10px;
+        background: tomato;
+        padding: 5px;
+        width: 100px;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        color: white;
+        border: 1px solid white;
+        cursor: pointer;
+    }
+    
     .close {
         position: absolute;
-        background: red;
+        background: tomato;
         border-radius: 50%;
-        height: 20px;
-        width: 20px;
+        height: 22px;
+        width: 22px;
         display: grid;
         place-content: center;
         top: 1%;
         right: 1%;
+        color: white;
+    }
+     .close:hover, button:hover {
+        background: white;
+        color: tomato;
+        border: 1px solid tomato;
+        cursor: pointer;
     }
 `
-export default function Form({ category, setShowForm, setValue, value }) {
+export default function Form({ category, setShowForm, setValue, value, userId }) {
     let nameRef = useRef("");
     let priceRef = useRef("");
     let quantityRef = useRef("");
@@ -35,7 +77,8 @@ export default function Form({ category, setShowForm, setValue, value }) {
             description: descriptionRef.current.value
         }
         try {
-            await db.collection(category).add(ourObj);
+            let data = await db.collection(`${userId}`);
+            await db.collection(`${category}`).add(ourObj);
             setValue([...value, ourObj])
             nameRef.current.value = "";
             priceRef.current.value = "";
