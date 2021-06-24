@@ -77,7 +77,7 @@ export default function Form({ category, setShowForm, setValue, value, userId })
             description: descriptionRef.current.value
         }
         try {
-            let data = await db.collection(`${userId}`);
+            // let data = await db.collection(`${userId}`);
             await db.collection(`${category}`).add(ourObj);
             setValue([...value, ourObj])
             nameRef.current.value = "";

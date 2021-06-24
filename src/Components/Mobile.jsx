@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, CardHolder } from './styles/containersStyle';
-import { Table } from './styles/tableStyles';
-import styled from "styled-components";
 import { db } from "./firebaseConfig";
-import TableHeader from "./TableHeader";
 import firebase from "firebase";
 import Form from "./Form";
 import { useHistory } from "react-router-dom";

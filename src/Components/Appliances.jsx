@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { CardHolder, Container, SubContainer } from './styles/containersStyle';
-import { Table } from './styles/tableStyles';
-import styled from "styled-components";
+import { CardHolder, Container } from './styles/containersStyle';
 import { db } from "./firebaseConfig";
-import TableHeader from "./TableHeader";
 import Form from "./Form";
 import firebase from "firebase";
 import { useHistory } from "react-router-dom";
 import Card from './Card';
-let SubContainer1 = styled(SubContainer)`
-    width: 95%;
-    height: auto;
-`
+
 
 export default function Appliances() {
     let history = useHistory();
